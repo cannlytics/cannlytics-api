@@ -1,0 +1,22 @@
+{
+  "name": "cannlytics_api",
+  "productName": "Cannlytics API",
+  "version": "0.0.1",
+  "license": "GPLv3",
+  "private": true,
+  "description": "Cannlytics API.",
+  "author": "Keegan Skeate <contact@cannlytics.com>",
+  "build": {
+    "productName": "Cannlytics API"
+  },
+  "scripts": {
+    "dev": "python manage.py runserver 4200",
+    "publish": "npm run container && npm run cloud && npm run deploy",
+    "lint": "python manage.py check",
+    "container": "gcloud builds submit --tag gcr.io/cannlytics/cannlytics-api",
+    "cloud": "gcloud run deploy cannlytics-api --image gcr.io/cannlytics/cannlytics-api --region us-central1 --allow-unauthenticated --platform managed",
+    "deploy": "firebase deploy --project cannlytics --only hosting:production"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

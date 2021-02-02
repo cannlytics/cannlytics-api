@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "cannlytics"
+  },
+  "targets": {
+    "cannlytics": {
+      "hosting": {
+        "dev": [
+          "cannlytics-api-dev"
+        ],
+        "production": [
+          "cannlytics-api"
+        ]
+      }
+    }
+  }
+}

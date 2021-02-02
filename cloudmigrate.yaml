@@ -1,0 +1,16 @@
+steps:
+- name: "gcr.io/cloud-builders/docker"
+  args: ["build", "-t", "gcr.io/cannlytics/cannlytics-api", "."]
+
+- name: "gcr.io/cloud-builders/docker"
+  args: ["push", "gcr.io/cannlytics/cannlytics-api"]
+
+# - name: "gcr.io/google-appengine/exec-wrapper"
+#   args: ["-i", "gcr.io/cannlytics/cannlytics-website",
+#          "-s", "cannlytics:us-central1:cannlytics-sql",
+#          "--", "python", "manage.py", "migrate"]
+
+# - name: "gcr.io/google-appengine/exec-wrapper"
+#   args: ["-i", "gcr.io/cannlytics/cannlytics-website",
+#          "-s", "cannlytics:us-central1:cannlytics-sql",
+#          "--", "python", "manage.py", "collectstatic", "--no-input"]
