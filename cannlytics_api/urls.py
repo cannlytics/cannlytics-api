@@ -22,13 +22,14 @@ urlpatterns = [
     path("v1/labs/<uuid:org_id>/logs/", labs.lab_logs),
 
     # Leaf test endpoints
-    path("/test/leaf/mmes/", leaf_test_api.mmes),
-    path("/test/leaf/lab_results/", leaf_test_api.lab_results),
+    path("test/leaf/mmes/", leaf_test_api.mmes),
+    path("test/leaf/lab_results/", leaf_test_api.lab_results),
     # path("/test/leaf/users"),
     # path("/test/leaf/areas"),
     # path("/test/leaf/areas/update"),
     # path("/test/leaf/strains"),
 
+    # TODO: Better handle 404's
 
     # User endpoints
     # path("v1/users/", users.users),

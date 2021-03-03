@@ -8,8 +8,8 @@ The Cannlytics API provides an interface to quickly receive samples, perform ana
 
 - [Installation](#installation)
 - [Development](#development)
-- [Publishing](#publishing)
 - [Testing](#testing)
+- [Publishing](#publishing)
 - [License](#license)
 
 ## Installation<a name="installation"></a>
@@ -36,10 +36,6 @@ npm run dev
 
 > Note that the API is run on port 4200 to allow for simultaneous development with other pieces of the Cannlytics engine.
 
-## Publishing<a name="publishing"></a>
-
-See [`docs/publishing.md`](docs/publishing.md) for instructions on how to publish the API. Publishing entails containerizing the API, deploying the container to Cloud Run, and directing hosting requests to the containerized app from Firebase Hosting.
-
 ## Testing<a name="testing"></a>
 
 Tests are performed with [`pytest`](https://docs.pytest.org/en/stable/). You can perform the tests by executing the `pytest` command from the `tests` directory.
@@ -47,6 +43,14 @@ Tests are performed with [`pytest`](https://docs.pytest.org/en/stable/). You can
 ```shell
 cd tests
 pytest
+```
+
+## Publishing<a name="publishing"></a>
+
+See [`docs/publishing.md`](docs/publishing.md) for instructions on how to publish the API. Publishing entails containerizing the API, deploying the container to Cloud Run, and directing hosting requests to the containerized app from Firebase Hosting. You can publish using Node.js with one quick command:
+
+```shell
+npm run publish
 ```
 
 ## License <a name="license"></a>
