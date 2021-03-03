@@ -16,7 +16,7 @@ import requests
 
 
 BASE = "http://127.0.0.1:4200/"
-ENDPOINTS = ["", "v1", "v1/", "v1/labs", "v1/labs/"]
+ENDPOINTS = ["", "/labs"]
 
 # TODO: Test authenticate.
 

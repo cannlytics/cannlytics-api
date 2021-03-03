@@ -1,86 +1,23 @@
-"""
-Views | Cannlytics API
-Created: 1/22/2021
-
-API to interface with cannabis analytics.
-"""
 from datetime import datetime
 from django.template.defaultfilters import slugify
-from firebase_admin import auth
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from utils.firebase import get_collection, get_document, update_document
-
-BASE = "https://api.cannlytics.com"
-ENDPOINTS = ["labs"]
-VERSION = "v1"
-
-
-#----------------------------------------------#
-# API helpers
-#----------------------------------------------#
-
-
-def authenticate(request):
-    """ Identify the user's Firebase account using an ID token. """
-    authorization = request.headers["Authorization"]
-    token = authorization.split(' ')[1]
-    claims = auth.verify_id_token(token)
-    uid = claims['uid']
-    request.session['uid'] = uid # Save user's custom claims in a session?
-    return claims
-
-
-#----------------------------------------------#
-# Base endpoints
-#----------------------------------------------#
+from .auth import authenticate
 
 
 @api_view(['GET'])
-def index(request, format=None):
-    """Informational base endpoint."""
-    message = f"Welcome to the Cannlytics API. The current version is {VERSION} and is located at {BASE}/{VERSION}."
-    return Response({ "data": message}, content_type="application/json")
+def lab(request, format=None):
+    """Get or update information about a lab."""
 
-
-@api_view(['GET'])
-def base(request, format=None):
-    """Informational version endpoint."""
-    message = f"Welcome to {VERSION} of the Cannlytics API. Available endpoints:\n\n"
-    for endpoint in ENDPOINTS:
-        message += f"{endpoint}\n"
-    return Response({ "data": message}, content_type="application/json")
-
-
-#----------------------------------------------#
-# User endpoints
-#----------------------------------------------#
-
-
-@api_view(['GET', 'POST'])
-def users(request, format=None):
-    """Get, update, or create users."""
-
-    # Get user(s).
+    # Query labs.
     if request.method == 'GET':
-        print("Getting user...")
-        # limit = request.query_params.get("limit", None)
-        # order_by = request.query_params.get("order_by", "state")
-        # # TODO: Get any filters from dict(request.query_params)
-        # labs = get_collection('labs', order_by=order_by, limit=limit, filters=[])
-        user = {}
-        return Response({ "data": user}, content_type="application/json")
-
-    # Update or create user(s).
-    elif request.method == 'POST':
-        print("Creating a user...")
-        return Response({ "success": True}, content_type="application/json")
-
-
-#----------------------------------------------#
-# Lab endpoints
-#----------------------------------------------#
+        limit = request.query_params.get("limit", None)
+        order_by = request.query_params.get("order_by", "state")
+        # TODO: Get any filters from dict(request.query_params)
+        labs = get_collection('labs', order_by=order_by, limit=limit, filters=[])
+        return Response({ "data": labs}, content_type="application/json")
 
 
 @api_view(['GET', 'POST'])
@@ -171,10 +108,3 @@ def lab_analyses(request, org_id, format=None):
         # TODO: Create an analysis.
         return Response({ "data": "Under construction"}, content_type="application/json")
 
-
-# TODO:
-# /regulations
-# /instruments
-# /analytes
-# /instruments
-# /lab_results
