@@ -55,8 +55,8 @@ npm run publish
 
 ## License <a name="license"></a>
 
+This application is released under the [MIT license](LICENSE.md). You can use the code for any purpose, including commercial projects.
+
+[![license](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+
 Made with 💖 by Cannlytics.
-
-Except where otherwise noted, copyright © 2021 Cannlytics.
-
-[GNU General Public License](http://www.gnu.org/licenses/gpl-3.0.html)
