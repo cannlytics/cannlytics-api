@@ -2,7 +2,7 @@ from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework import routers
 from . import views
-from .api import labs, users, leaf_test_api
+from .api import labs, users, leaf_test_api, cannlypedia
 
 # Change URLs to not end in a trailing slash.
 # https://stackoverflow.com/questions/46163838/how-can-i-make-a-trailing-slash-optional-on-a-django-rest-framework-simplerouter
@@ -49,6 +49,9 @@ urlpatterns = [
 
     # Optional: Find a way to generalize
     # path("v1/<slug:endpoint>/", views.get_labs, name="endpoint"),
+
+    # Functional
+    path('scholars/', cannlypedia.scholars),
 ]
 
 # Adding optional format suffixes to our URLs
