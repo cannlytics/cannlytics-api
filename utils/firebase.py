@@ -11,15 +11,15 @@ from uuid import uuid4
 initialize_app()
 
 
-#------------------------------------------------------------#
+# ------------------------------------------------------------#
 # Firestore helpers
-#------------------------------------------------------------#
+# ------------------------------------------------------------#
 
 
 def create_reference(database, reference):
     """Create a database reference for a given path."""
     ref = database
-    parts = reference.split('/')
+    parts = reference.split("/")
     for i in range(len(parts)):
         part = parts[i]
         if i % 2:
@@ -31,7 +31,7 @@ def create_reference(database, reference):
 
 def get_keywords(string):
     """Get keywords for a given string."""
-    keywords = string.lower().split(' ')
+    keywords = string.lower().split(" ")
     keywords = list(filter("", keywords))
     return keywords
 
@@ -75,23 +75,25 @@ def get_collection(ref, limit=None, order_by=None, desc=False, filters=[]):
     collection = create_reference(database, ref)
     if filters:
         for filter in filters:
-            collection = collection.where(filter["key"], filter["operation"], filter["value"])
+            collection = collection.where(
+                filter["key"], filter["operation"], filter["value"]
+            )
     if order_by and desc:
-        collection = collection.order_by(order_by, direction='DESCENDING')
+        collection = collection.order_by(order_by, direction="DESCENDING")
     elif order_by:
         collection = collection.order_by(order_by)
     if limit:
         collection = collection.limit(limit)
-    query = collection.stream() # Only handles streams less than 2 mins.
+    query = collection.stream()  # Only handles streams less than 2 mins.
     for doc in query:
         data = doc.to_dict()
         docs.append(data)
     return docs
 
 
-#------------------------------------------------------------#
+# ------------------------------------------------------------#
 # Authentication helpers
-#------------------------------------------------------------#
+# ------------------------------------------------------------#
 
 
 def create_account(name, email, notification=True):
@@ -99,7 +101,7 @@ def create_account(name, email, notification=True):
     Given user name and email, create an account if the email isn't being used
     by an existing account.
     """
-    chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$-_'
+    chars = "abcdefghijklmnopqrstuvwxyz0123456789!@#$-_"
     password = get_random_string(42, chars)
     # Optional: Try to get photo_url from gravatar.
     try:
@@ -110,38 +112,29 @@ def create_account(name, email, notification=True):
             password=password,
             display_name=name,
             photo_url=None,
-            disabled=False
+            disabled=False,
         )
         return user, password
-    except:
+    except Exception:  # TODO: what is the actual exception?
         return None, None
 
 
-#------------------------------------------------------------#
+# ------------------------------------------------------------#
 # Storage helpers
-#------------------------------------------------------------#
+# ------------------------------------------------------------#
 
 
 def download_file(source_blob_name, destination_file_name):
     """Downloads a file from Firebase Storage."""
-    bucket = storage.bucket(name="cannlytics.appspot.com") # TODO: Get from .env
+    bucket = storage.bucket(name="cannlytics.appspot.com")  # TODO: Get from .env
     blob = bucket.blob(source_blob_name)
     blob.download_to_filename(destination_file_name)
-    print(
-        "Blob {} downloaded to {}.".format(
-            source_blob_name, destination_file_name
-        )
-    )
+    print("Blob {} downloaded to {}.".format(source_blob_name, destination_file_name))
 
 
 def upload_file(destination_blob_name, source_file_name):
     """Upload file to Firebase Storage."""
-    bucket = storage.bucket(name="cannlytics.appspot.com") # TODO: Get from .env
+    bucket = storage.bucket(name="cannlytics.appspot.com")  # TODO: Get from .env
     blob = bucket.blob(destination_blob_name)
     blob.upload_from_filename(source_file_name)
-    print(
-        "File {} uploaded to {}.".format(
-            source_file_name, destination_blob_name
-        )
-    )
-
+    print("File {} uploaded to {}.".format(source_file_name, destination_blob_name))

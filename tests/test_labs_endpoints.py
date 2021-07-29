@@ -43,8 +43,7 @@ def test_endpoints(target_endpoints, expected_result):
     """Request each endpoint, expecting responses with 200 status code."""
     metadata = []
     for endpoint in ENDPOINTS:
-        url = os.path.join(BASE, endpoint) 
+        url = os.path.join(BASE, endpoint)
         response = requests.get(url)
         metadata.append(response.status_code)
     assert metadata == expected_result
-
