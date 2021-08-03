@@ -15,8 +15,8 @@ import pytest
 import requests
 
 
-BASE = "http://127.0.0.1:4200/"
-ENDPOINTS = ["", "/labs"]
+BASE = 'http://127.0.0.1:4200/'
+ENDPOINTS = ['', '/labs']
 
 # TODO: Test authenticate.
 

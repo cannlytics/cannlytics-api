@@ -18,8 +18,8 @@ Resources:
 import os
 import requests
 
-BASE = "http://127.0.0.1:4200/"
-endpoint = "users"
+BASE = 'http://127.0.0.1:4200/'
+endpoint = 'users'
 
 url = os.path.join(BASE, endpoint)
-response = requests.post(url, {"email": "contact@cannlytics.com"})
+response = requests.post(url, {'email': 'contact@cannlytics.com'})
