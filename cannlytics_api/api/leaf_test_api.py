@@ -8,7 +8,7 @@ from utils.firebase import get_collection
 
 @api_view(['GET', 'POST'])
 def lab_results(request, format=None):
-    '''Get lab results data.'''
+    """Get lab results data."""
 
     if request.method == 'GET':
         limit = request.query_params.get('limit', 1000)
@@ -28,7 +28,7 @@ def lab_results(request, format=None):
 
 @api_view(['GET'])
 def mmes(request, format=None):
-    '''Get licensee (MME) data.'''
+    """Get licensee (MME) data."""
 
     if request.method == 'GET':
         limit = request.query_params.get('limit', None)

@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 @api_view(['GET'])
 def scholars(request, format=None):
-    '''Get information about scholars.'''
+    """Get information about scholars."""
 
     if request.method == 'GET':
         author = request.query_params.get('q', None)

@@ -9,7 +9,7 @@ from .auth import authenticate
 
 @api_view(['GET'])
 def lab(request, format=None):
-    '''Get or update information about a lab.'''
+    """Get or update information about a lab."""
 
     # Query labs.
     if request.method == 'GET':
@@ -22,7 +22,7 @@ def lab(request, format=None):
 
 @api_view(['GET', 'POST'])
 def labs(request, format=None):
-    '''Get or update information about labs.'''
+    """Get or update information about labs."""
 
     # Query labs.
     if request.method == 'GET':
@@ -84,7 +84,7 @@ def labs(request, format=None):
 
 @api_view(['GET', 'POST'])
 def lab_logs(request, org_id, format=None):
-    '''Get or create lab logs.'''
+    """Get or create lab logs."""
 
     if request.method == 'GET':
         data = get_collection(f'labs/{org_id}/logs')
@@ -97,9 +97,9 @@ def lab_logs(request, org_id, format=None):
 
 @api_view(['GET', 'POST'])
 def lab_analyses(request, org_id, format=None):
-    '''
+    """
     Get or update (TODO) lab analyses.
-    '''
+    """
 
     if request.method == 'GET':
         data = get_collection(f'labs/{org_id}/analyses')

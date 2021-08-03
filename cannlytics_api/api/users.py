@@ -10,7 +10,7 @@ from rest_framework.response import Response
 
 @api_view(['GET', 'POST'])
 def users(request, format=None):
-    '''Get, update, or create users.'''
+    """Get, update, or create users."""
     # try:
     #     claims = authenticate(request)
     # except:
