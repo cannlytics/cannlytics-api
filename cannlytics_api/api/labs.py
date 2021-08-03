@@ -16,8 +16,8 @@ def lab(request, format=None):
         limit = request.query_params.get("limit", None)
         order_by = request.query_params.get("order_by", "state")
         # TODO: Get any filters from dict(request.query_params)
-        labs = get_collection('labs', order_by=order_by, limit=limit, filters=[])
-        return Response({ "data": labs}, content_type="application/json")
+        labs = get_collection("labs", order_by=order_by, limit=limit, filters=[])
+        return Response({"data": labs}, content_type="application/json")
 
 
 @api_view(['GET', 'POST'])
@@ -29,8 +29,8 @@ def labs(request, format=None):
         limit = request.query_params.get("limit", None)
         order_by = request.query_params.get("order_by", "state")
         # TODO: Get any filters from dict(request.query_params)
-        labs = get_collection('labs', order_by=order_by, limit=limit, filters=[])
-        return Response({ "data": labs}, content_type="application/json")
+        labs = get_collection("labs", order_by=order_by, limit=limit, filters=[])
+        return Response({"data": labs}, content_type="application/json")
 
     # Update a lab given a valid Firebase token.
     elif request.method == 'POST':
@@ -38,8 +38,10 @@ def labs(request, format=None):
         # Check token.
         try:
             claims = authenticate(request)
-        except:
-            return Response({"error": "Could not authenticate."}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception:  # TODO: what is the correct exception?
+            return Response(
+                {"error": "Could not authenticate."}, status=status.HTTP_400_BAD_REQUEST
+            )
 
         # Get the posted lab data.
         lab = request.data
@@ -56,7 +58,7 @@ def labs(request, format=None):
             before = existing_data[key]
             if before != after:
                 changes.append({"key": key, "before": before, "after": after})
-        
+
         # Get a timestamp.
         timestamp = datetime.now().isoformat()
         lab["updated_at"] = timestamp
@@ -86,12 +88,11 @@ def lab_logs(request, org_id, format=None):
 
     if request.method == 'GET':
         data = get_collection(f"labs/{org_id}/logs")
-        return Response({ "data": data}, content_type="application/json")
-    
+        return Response({"data": data}, content_type="application/json")
+
     elif request.method == 'POST':
         # TODO: Create a log.
-        return Response({ "data": "Under construction"}, content_type="application/json")
-
+        return Response({"data": "Under construction"}, content_type="application/json")
 
 
 @api_view(['GET', 'POST'])
@@ -102,9 +103,8 @@ def lab_analyses(request, org_id, format=None):
 
     if request.method == 'GET':
         data = get_collection(f"labs/{org_id}/analyses")
-        return Response({ "data": data}, content_type="application/json")
-    
+        return Response({"data": data}, content_type="application/json")
+
     elif request.method == 'POST':
         # TODO: Create an analysis.
-        return Response({ "data": "Under construction"}, content_type="application/json")
-
+        return Response({"data": "Under construction"}, content_type="application/json")

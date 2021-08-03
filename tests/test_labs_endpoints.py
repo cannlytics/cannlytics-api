@@ -15,8 +15,8 @@ import pytest
 import requests
 
 
-BASE = "http://127.0.0.1:4200/"
-ENDPOINTS = ["", "/labs"]
+BASE = 'http://127.0.0.1:4200/'
+ENDPOINTS = ['', '/labs']
 
 # TODO: Test authenticate.
 
@@ -43,8 +43,7 @@ def test_endpoints(target_endpoints, expected_result):
     """Request each endpoint, expecting responses with 200 status code."""
     metadata = []
     for endpoint in ENDPOINTS:
-        url = os.path.join(BASE, endpoint) 
+        url = os.path.join(BASE, endpoint)
         response = requests.get(url)
         metadata.append(response.status_code)
     assert metadata == expected_result
-

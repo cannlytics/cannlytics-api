@@ -16,8 +16,8 @@ import requests
 import urllib
 
 # Cannlytics API and API scholars endpoint.
-url = 'https://api.cannlytics.com/' # Production
-url = 'http://127.0.0.1:4200/' # Dev
+url = 'https://api.cannlytics.com/'  # Production
+url = 'http://127.0.0.1:4200/'  # Dev
 endpoint = 'scholars/'
 
 expected_result = {
