@@ -7,12 +7,12 @@ from utils.firebase import get_collection, get_document, update_document
 from .auth import authenticate
 
 
-@api_view(["GET"])
+@api_view(['GET'])
 def lab(request, format=None):
     """Get or update information about a lab."""
 
     # Query labs.
-    if request.method == "GET":
+    if request.method == 'GET':
         limit = request.query_params.get("limit", None)
         order_by = request.query_params.get("order_by", "state")
         # TODO: Get any filters from dict(request.query_params)
@@ -20,12 +20,12 @@ def lab(request, format=None):
         return Response({"data": labs}, content_type="application/json")
 
 
-@api_view(["GET", "POST"])
+@api_view(['GET', 'POST'])
 def labs(request, format=None):
     """Get or update information about labs."""
 
     # Query labs.
-    if request.method == "GET":
+    if request.method == 'GET':
         limit = request.query_params.get("limit", None)
         order_by = request.query_params.get("order_by", "state")
         # TODO: Get any filters from dict(request.query_params)
@@ -33,7 +33,7 @@ def labs(request, format=None):
         return Response({"data": labs}, content_type="application/json")
 
     # Update a lab given a valid Firebase token.
-    elif request.method == "POST":
+    elif request.method == 'POST':
 
         # Check token.
         try:
@@ -82,29 +82,29 @@ def labs(request, format=None):
         return Response(log_entry, status=status.HTTP_201_CREATED)
 
 
-@api_view(["GET", "POST"])
+@api_view(['GET', 'POST'])
 def lab_logs(request, org_id, format=None):
     """Get or create lab logs."""
 
-    if request.method == "GET":
+    if request.method == 'GET':
         data = get_collection(f"labs/{org_id}/logs")
         return Response({"data": data}, content_type="application/json")
 
-    elif request.method == "POST":
+    elif request.method == 'POST':
         # TODO: Create a log.
         return Response({"data": "Under construction"}, content_type="application/json")
 
 
-@api_view(["GET", "POST"])
+@api_view(['GET', 'POST'])
 def lab_analyses(request, org_id, format=None):
     """
     Get or update (TODO) lab analyses.
     """
 
-    if request.method == "GET":
+    if request.method == 'GET':
         data = get_collection(f"labs/{org_id}/analyses")
         return Response({"data": data}, content_type="application/json")
 
-    elif request.method == "POST":
+    elif request.method == 'POST':
         # TODO: Create an analysis.
         return Response({"data": "Under construction"}, content_type="application/json")
